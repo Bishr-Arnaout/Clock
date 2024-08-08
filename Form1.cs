@@ -245,7 +245,6 @@ namespace Clock
         private void btnResetTimer_Click(object sender, EventArgs e)
         {
             ResetTimer();
-            ResetProgressBar();
         }
         private void btnPauseTimer_Click(object sender, EventArgs e)
         {
