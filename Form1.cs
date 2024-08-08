@@ -150,10 +150,10 @@ namespace Clock
             else if (numHour.Value == 1) TimerWatch += numHour.Value.ToString() + " hour ";
 
             if (numMin.Value > 1) TimerWatch += numMin.Value.ToString() + " minutes ";
-            else if (numMin.Value == 1) TimerWatch += numMin.Value.ToString() + " minutes ";
+            else if (numMin.Value == 1) TimerWatch += numMin.Value.ToString() + " minute ";
 
             if (numSec.Value > 1) TimerWatch += numSec.Value.ToString() + " seconds";
-            else if (numSec.Value == 1) TimerWatch += numSec.Value.ToString() + " seconds";
+            else if (numSec.Value == 1) TimerWatch += numSec.Value.ToString() + " second";
 
             return TimerWatch;
         }
