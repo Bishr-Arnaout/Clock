@@ -1,0 +1,12 @@
+D:\Programming\Projects\Clock\bin\Debug\Clock.exe.config
+D:\Programming\Projects\Clock\bin\Debug\Clock.exe
+D:\Programming\Projects\Clock\bin\Debug\Clock.pdb
+D:\Programming\Projects\Clock\bin\Debug\Guna.UI2.dll
+D:\Programming\Projects\Clock\obj\Debug\Clock.csproj.AssemblyReference.cache
+D:\Programming\Projects\Clock\obj\Debug\Clock.Form1.resources
+D:\Programming\Projects\Clock\obj\Debug\Clock.Properties.Resources.resources
+D:\Programming\Projects\Clock\obj\Debug\Clock.csproj.GenerateResource.cache
+D:\Programming\Projects\Clock\obj\Debug\Clock.csproj.CoreCompileInputs.cache
+D:\Programming\Projects\Clock\obj\Debug\Clock.csproj.Up2Date
+D:\Programming\Projects\Clock\obj\Debug\Clock.exe
+D:\Programming\Projects\Clock\obj\Debug\Clock.pdb

@@ -46,10 +46,27 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.prbTimer = new Guna.UI2.WinForms.Guna2CircleProgressBar();
+            this.lblTimerTime = new System.Windows.Forms.Label();
+            this.lblTimerWatch = new System.Windows.Forms.Label();
+            this.btnContinueTimer = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.btnPauseTimer = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.btnResetTimer = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.btnStartTimer = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.numSec = new Guna.UI2.WinForms.Guna2NumericUpDown();
+            this.numMin = new Guna.UI2.WinForms.Guna2NumericUpDown();
+            this.numHour = new Guna.UI2.WinForms.Guna2NumericUpDown();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.notifyTimer = new System.Windows.Forms.NotifyIcon(this.components);
             this.StopWatchScreen.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.prbTimer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSec)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHour)).BeginInit();
             this.SuspendLayout();
             // 
             // StopWatchScreen
@@ -294,13 +311,202 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.Color.Black;
+            this.tabPage2.Controls.Add(this.prbTimer);
+            this.tabPage2.Controls.Add(this.btnContinueTimer);
+            this.tabPage2.Controls.Add(this.btnPauseTimer);
+            this.tabPage2.Controls.Add(this.btnResetTimer);
+            this.tabPage2.Controls.Add(this.btnStartTimer);
+            this.tabPage2.Controls.Add(this.numSec);
+            this.tabPage2.Controls.Add(this.numMin);
+            this.tabPage2.Controls.Add(this.numHour);
             this.tabPage2.Location = new System.Drawing.Point(124, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(581, 448);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Timer";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // prbTimer
+            // 
+            this.prbTimer.AnimationSpeed = 1000F;
+            this.prbTimer.Controls.Add(this.lblTimerTime);
+            this.prbTimer.Controls.Add(this.lblTimerWatch);
+            this.prbTimer.FillColor = System.Drawing.Color.MidnightBlue;
+            this.prbTimer.FillThickness = 18;
+            this.prbTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold);
+            this.prbTimer.ForeColor = System.Drawing.Color.White;
+            this.prbTimer.Location = new System.Drawing.Point(107, 8);
+            this.prbTimer.Minimum = 0;
+            this.prbTimer.Name = "prbTimer";
+            this.prbTimer.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.prbTimer.ProgressColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.prbTimer.ProgressThickness = 18;
+            this.prbTimer.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.prbTimer.Size = new System.Drawing.Size(337, 337);
+            this.prbTimer.TabIndex = 29;
+            this.prbTimer.Value = 1;
+            this.prbTimer.Visible = false;
+            // 
+            // lblTimerTime
+            // 
+            this.lblTimerTime.BackColor = System.Drawing.Color.Transparent;
+            this.lblTimerTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblTimerTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTimerTime.Location = new System.Drawing.Point(31, 148);
+            this.lblTimerTime.Name = "lblTimerTime";
+            this.lblTimerTime.Size = new System.Drawing.Size(297, 46);
+            this.lblTimerTime.TabIndex = 1;
+            this.lblTimerTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblTimerWatch
+            // 
+            this.lblTimerWatch.AutoSize = true;
+            this.lblTimerWatch.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTimerWatch.Location = new System.Drawing.Point(94, 110);
+            this.lblTimerWatch.Name = "lblTimerWatch";
+            this.lblTimerWatch.Size = new System.Drawing.Size(151, 38);
+            this.lblTimerWatch.TabIndex = 0;
+            this.lblTimerWatch.Tag = "00:00:00";
+            this.lblTimerWatch.Text = "00:00:00";
+            // 
+            // btnContinueTimer
+            // 
+            this.btnContinueTimer.BackgroundImage = global::Clock.Properties.Resources.Continue;
+            this.btnContinueTimer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnContinueTimer.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnContinueTimer.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnContinueTimer.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnContinueTimer.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnContinueTimer.FillColor = System.Drawing.Color.Transparent;
+            this.btnContinueTimer.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnContinueTimer.ForeColor = System.Drawing.Color.White;
+            this.btnContinueTimer.Location = new System.Drawing.Point(312, 351);
+            this.btnContinueTimer.Name = "btnContinueTimer";
+            this.btnContinueTimer.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.btnContinueTimer.Size = new System.Drawing.Size(70, 70);
+            this.btnContinueTimer.TabIndex = 32;
+            this.btnContinueTimer.Visible = false;
+            this.btnContinueTimer.Click += new System.EventHandler(this.btnContinueTimer_Click);
+            // 
+            // btnPauseTimer
+            // 
+            this.btnPauseTimer.BackgroundImage = global::Clock.Properties.Resources.Pause;
+            this.btnPauseTimer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPauseTimer.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnPauseTimer.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnPauseTimer.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnPauseTimer.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnPauseTimer.FillColor = System.Drawing.Color.Transparent;
+            this.btnPauseTimer.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnPauseTimer.ForeColor = System.Drawing.Color.White;
+            this.btnPauseTimer.Location = new System.Drawing.Point(312, 351);
+            this.btnPauseTimer.Name = "btnPauseTimer";
+            this.btnPauseTimer.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.btnPauseTimer.Size = new System.Drawing.Size(70, 70);
+            this.btnPauseTimer.TabIndex = 31;
+            this.btnPauseTimer.Visible = false;
+            this.btnPauseTimer.Click += new System.EventHandler(this.btnPauseTimer_Click);
+            // 
+            // btnResetTimer
+            // 
+            this.btnResetTimer.BackgroundImage = global::Clock.Properties.Resources.Reset;
+            this.btnResetTimer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnResetTimer.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnResetTimer.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnResetTimer.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnResetTimer.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnResetTimer.FillColor = System.Drawing.Color.Transparent;
+            this.btnResetTimer.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnResetTimer.ForeColor = System.Drawing.Color.White;
+            this.btnResetTimer.Location = new System.Drawing.Point(160, 351);
+            this.btnResetTimer.Name = "btnResetTimer";
+            this.btnResetTimer.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.btnResetTimer.Size = new System.Drawing.Size(70, 70);
+            this.btnResetTimer.TabIndex = 30;
+            this.btnResetTimer.Visible = false;
+            this.btnResetTimer.Click += new System.EventHandler(this.btnResetTimer_Click);
+            // 
+            // btnStartTimer
+            // 
+            this.btnStartTimer.BackgroundImage = global::Clock.Properties.Resources.Continue;
+            this.btnStartTimer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnStartTimer.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnStartTimer.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnStartTimer.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnStartTimer.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnStartTimer.FillColor = System.Drawing.Color.Transparent;
+            this.btnStartTimer.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnStartTimer.ForeColor = System.Drawing.Color.White;
+            this.btnStartTimer.Location = new System.Drawing.Point(236, 351);
+            this.btnStartTimer.Name = "btnStartTimer";
+            this.btnStartTimer.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.btnStartTimer.Size = new System.Drawing.Size(70, 70);
+            this.btnStartTimer.TabIndex = 28;
+            this.btnStartTimer.Click += new System.EventHandler(this.btnStartTimer_Click);
+            // 
+            // numSec
+            // 
+            this.numSec.BackColor = System.Drawing.Color.Transparent;
+            this.numSec.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.numSec.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.numSec.FillColor = System.Drawing.Color.Black;
+            this.numSec.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numSec.ForeColor = System.Drawing.Color.White;
+            this.numSec.Location = new System.Drawing.Point(356, 189);
+            this.numSec.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.numSec.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.numSec.Name = "numSec";
+            this.numSec.Size = new System.Drawing.Size(96, 58);
+            this.numSec.TabIndex = 2;
+            this.numSec.UpDownButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.numSec.UpDownButtonForeColor = System.Drawing.Color.MidnightBlue;
+            // 
+            // numMin
+            // 
+            this.numMin.BackColor = System.Drawing.Color.Transparent;
+            this.numMin.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.numMin.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.numMin.FillColor = System.Drawing.Color.Black;
+            this.numMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numMin.ForeColor = System.Drawing.Color.White;
+            this.numMin.Location = new System.Drawing.Point(225, 189);
+            this.numMin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.numMin.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.numMin.Name = "numMin";
+            this.numMin.Size = new System.Drawing.Size(96, 58);
+            this.numMin.TabIndex = 1;
+            this.numMin.UpDownButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.numMin.UpDownButtonForeColor = System.Drawing.Color.MidnightBlue;
+            // 
+            // numHour
+            // 
+            this.numHour.BackColor = System.Drawing.Color.Transparent;
+            this.numHour.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.numHour.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.numHour.FillColor = System.Drawing.Color.Black;
+            this.numHour.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numHour.ForeColor = System.Drawing.Color.White;
+            this.numHour.Location = new System.Drawing.Point(94, 189);
+            this.numHour.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.numHour.Maximum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.numHour.Name = "numHour";
+            this.numHour.Size = new System.Drawing.Size(96, 58);
+            this.numHour.TabIndex = 0;
+            this.numHour.UpDownButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.numHour.UpDownButtonForeColor = System.Drawing.Color.MidnightBlue;
             // 
             // tabPage3
             // 
@@ -318,6 +524,16 @@
             this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // timer2
+            // 
+            this.timer2.Interval = 1000;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // notifyTimer
+            // 
+            this.notifyTimer.Text = "notifyIcon1";
+            this.notifyTimer.Visible = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -330,6 +546,12 @@
             this.StopWatchScreen.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.prbTimer.ResumeLayout(false);
+            this.prbTimer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSec)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHour)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -354,6 +576,18 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox lsbLaps;
+        private Guna.UI2.WinForms.Guna2NumericUpDown numHour;
+        private Guna.UI2.WinForms.Guna2NumericUpDown numSec;
+        private Guna.UI2.WinForms.Guna2NumericUpDown numMin;
+        private Guna.UI2.WinForms.Guna2CircleProgressBar prbTimer;
+        private Guna.UI2.WinForms.Guna2CircleButton btnStartTimer;
+        private System.Windows.Forms.Label lblTimerWatch;
+        private System.Windows.Forms.Label lblTimerTime;
+        private System.Windows.Forms.Timer timer2;
+        private Guna.UI2.WinForms.Guna2CircleButton btnPauseTimer;
+        private Guna.UI2.WinForms.Guna2CircleButton btnResetTimer;
+        private Guna.UI2.WinForms.Guna2CircleButton btnContinueTimer;
+        private System.Windows.Forms.NotifyIcon notifyTimer;
     }
 }
 

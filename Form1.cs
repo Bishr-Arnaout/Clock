@@ -6,7 +6,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace Clock
@@ -20,7 +22,9 @@ namespace Clock
         private ulong _TotalTime = 0;
         private ulong _Time = 0;
         private int _Laps = 0;
-        Stopwatch MyStopWatch;
+        private Stopwatch MyStopWatch;
+        private bool IsTimerRunning = false;
+        TimeSpan CountDownTimer;
         public Form1()
         {
             InitializeComponent();
@@ -132,6 +136,128 @@ namespace Clock
         private void timer1_Tick(object sender, EventArgs e)
         {
             lblTime.Text = string.Format("{0:hh\\:mm\\:ss\\.ff}", MyStopWatch.Elapsed);
+        }
+        private void ReduceTimer()
+        {
+            prbTimer.Value = (int)CountDownTimer.TotalSeconds - 1;
+            prbTimer.Refresh();
+        }
+        private string GetTimerWatch()
+        {
+            string TimerWatch = "Total ";
+
+            if (numHour.Value > 1) TimerWatch += numHour.Value.ToString() + " hours ";
+            else if (numHour.Value == 1) TimerWatch += numHour.Value.ToString() + " hour ";
+
+            if (numMin.Value > 1) TimerWatch += numMin.Value.ToString() + " minutes ";
+            else if (numMin.Value == 1) TimerWatch += numMin.Value.ToString() + " minutes ";
+
+            if (numSec.Value > 1) TimerWatch += numSec.Value.ToString() + " seconds";
+            else if (numSec.Value == 1) TimerWatch += numSec.Value.ToString() + " seconds";
+
+            return TimerWatch;
+        }
+        private void ResetProgressBar()
+        {
+            prbTimer.Value = (int)CountDownTimer.TotalSeconds;
+            prbTimer.Maximum = prbTimer.Value;
+        }
+        private void btnStartTimer_Click(object sender, EventArgs e)
+        {
+            if (numHour.Value == 0 && numMin.Value == 0 && numSec.Value == 0) return;
+
+            CountDownTimer = new TimeSpan((byte)numHour.Value, (byte)numMin.Value, (byte)numSec.Value);
+            lblTimerWatch.Text = CountDownTimer.ToString();
+
+            IsTimerRunning = true;
+
+            numHour.Visible = false;
+            numMin.Visible = false;
+            numSec.Visible = false;
+
+            prbTimer.Visible = true;
+            btnStartTimer.Visible = false;
+            btnPauseTimer.Visible = true;
+            btnResetTimer.Visible = true;
+
+            ResetProgressBar();
+
+            lblTimerTime.Text = GetTimerWatch();
+
+            timer2.Start();
+        }
+        private void NotifyUser()
+        {
+            notifyTimer.Icon = SystemIcons.Application;
+            notifyTimer.BalloonTipIcon = ToolTipIcon.Info;
+            notifyTimer.BalloonTipTitle = "";
+            notifyTimer.BalloonTipText = GetTimerWatch().Substring(6).Trim();
+            notifyTimer.ShowBalloonTip(1000);
+        }
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (CountDownTimer.TotalSeconds == 1 && IsTimerRunning)
+            {
+                timer2.Stop();
+
+                ReduceTimer();
+                lblTimerWatch.Text = lblTimerWatch.Tag.ToString();
+                this.Refresh();
+
+                Thread.Sleep(300);
+
+                NotifyUser();
+
+                IsTimerRunning = false;
+
+                numHour.Visible = true;
+                numMin.Visible = true;
+                numSec.Visible = true;
+
+                prbTimer.Visible = false;
+                btnStartTimer.Visible = true;
+                btnPauseTimer.Visible = false;
+                btnResetTimer.Visible = false;
+                return;
+            }
+
+            if (IsTimerRunning)
+            {
+                ReduceTimer();
+                CountDownTimer = CountDownTimer.Subtract(TimeSpan.FromSeconds(1));
+                lblTimerWatch.Text = CountDownTimer.ToString();
+            }
+        }
+        private void ResetTimer()
+        {
+            timer2.Stop();
+
+            prbTimer.Visible = false;
+            numHour.Visible = true;
+            numMin.Visible = true;
+            numSec.Visible = true;
+
+            btnResetTimer.Visible = false;
+            btnPauseTimer.Visible = false;
+            btnContinueTimer.Visible = false;
+            btnStartTimer.Visible = true;
+        }
+        private void btnResetTimer_Click(object sender, EventArgs e)
+        {
+            ResetTimer();
+            ResetProgressBar();
+        }
+        private void btnPauseTimer_Click(object sender, EventArgs e)
+        {
+            timer2.Stop();
+            btnPauseTimer.Visible = false;
+            btnContinueTimer.Visible = true;
+        }
+        private void btnContinueTimer_Click(object sender, EventArgs e)
+        {
+            timer2.Start();
+            btnPauseTimer.Visible = true;
+            btnContinueTimer.Visible = false;
         }
     }
 }
