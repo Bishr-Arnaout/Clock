@@ -56,10 +56,13 @@
             this.numSec = new Guna.UI2.WinForms.Guna2NumericUpDown();
             this.numMin = new Guna.UI2.WinForms.Guna2NumericUpDown();
             this.numHour = new Guna.UI2.WinForms.Guna2NumericUpDown();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.CurrentTimeScreen = new System.Windows.Forms.TabPage();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.notifyTimer = new System.Windows.Forms.NotifyIcon(this.components);
+            this.lblCurrentTime = new System.Windows.Forms.Label();
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.lblCurrentDate = new System.Windows.Forms.Label();
             this.StopWatchScreen.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -67,6 +70,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numSec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHour)).BeginInit();
+            this.CurrentTimeScreen.SuspendLayout();
             this.SuspendLayout();
             // 
             // StopWatchScreen
@@ -74,7 +78,7 @@
             this.StopWatchScreen.Alignment = System.Windows.Forms.TabAlignment.Left;
             this.StopWatchScreen.Controls.Add(this.tabPage1);
             this.StopWatchScreen.Controls.Add(this.tabPage2);
-            this.StopWatchScreen.Controls.Add(this.tabPage3);
+            this.StopWatchScreen.Controls.Add(this.CurrentTimeScreen);
             this.StopWatchScreen.ItemSize = new System.Drawing.Size(120, 121);
             this.StopWatchScreen.Location = new System.Drawing.Point(0, 0);
             this.StopWatchScreen.Name = "StopWatchScreen";
@@ -485,7 +489,6 @@
             this.numMin.Size = new System.Drawing.Size(96, 58);
             this.numMin.TabIndex = 1;
             this.numMin.UpDownButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.numMin.UpDownButtonForeColor = System.Drawing.Color.MidnightBlue;
             // 
             // numHour
             // 
@@ -508,15 +511,17 @@
             this.numHour.UpDownButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.numHour.UpDownButtonForeColor = System.Drawing.Color.MidnightBlue;
             // 
-            // tabPage3
+            // CurrentTimeScreen
             // 
-            this.tabPage3.Location = new System.Drawing.Point(124, 4);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(581, 448);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Current Time";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.CurrentTimeScreen.BackColor = System.Drawing.Color.Black;
+            this.CurrentTimeScreen.Controls.Add(this.lblCurrentDate);
+            this.CurrentTimeScreen.Controls.Add(this.lblCurrentTime);
+            this.CurrentTimeScreen.Location = new System.Drawing.Point(124, 4);
+            this.CurrentTimeScreen.Name = "CurrentTimeScreen";
+            this.CurrentTimeScreen.Padding = new System.Windows.Forms.Padding(3);
+            this.CurrentTimeScreen.Size = new System.Drawing.Size(581, 448);
+            this.CurrentTimeScreen.TabIndex = 2;
+            this.CurrentTimeScreen.Text = "Current Time";
             // 
             // timer1
             // 
@@ -533,6 +538,32 @@
             // 
             this.notifyTimer.Text = "notifyIcon1";
             this.notifyTimer.Visible = true;
+            // 
+            // lblCurrentTime
+            // 
+            this.lblCurrentTime.AutoSize = true;
+            this.lblCurrentTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentTime.ForeColor = System.Drawing.Color.White;
+            this.lblCurrentTime.Location = new System.Drawing.Point(157, 95);
+            this.lblCurrentTime.Name = "lblCurrentTime";
+            this.lblCurrentTime.Size = new System.Drawing.Size(0, 52);
+            this.lblCurrentTime.TabIndex = 0;
+            // 
+            // timer3
+            // 
+            this.timer3.Enabled = true;
+            this.timer3.Interval = 1000;
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
+            // lblCurrentDate
+            // 
+            this.lblCurrentDate.AutoSize = true;
+            this.lblCurrentDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentDate.ForeColor = System.Drawing.Color.White;
+            this.lblCurrentDate.Location = new System.Drawing.Point(188, 153);
+            this.lblCurrentDate.Name = "lblCurrentDate";
+            this.lblCurrentDate.Size = new System.Drawing.Size(0, 16);
+            this.lblCurrentDate.TabIndex = 1;
             // 
             // Form1
             // 
@@ -552,6 +583,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numSec)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHour)).EndInit();
+            this.CurrentTimeScreen.ResumeLayout(false);
+            this.CurrentTimeScreen.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -561,7 +594,7 @@
         private Guna.UI2.WinForms.Guna2TabControl StopWatchScreen;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage CurrentTimeScreen;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label lblTime;
         private Guna.UI2.WinForms.Guna2CircleButton btnStop;
@@ -588,6 +621,9 @@
         private Guna.UI2.WinForms.Guna2CircleButton btnResetTimer;
         private Guna.UI2.WinForms.Guna2CircleButton btnContinueTimer;
         private System.Windows.Forms.NotifyIcon notifyTimer;
+        private System.Windows.Forms.Label lblCurrentTime;
+        private System.Windows.Forms.Timer timer3;
+        private System.Windows.Forms.Label lblCurrentDate;
     }
 }
 

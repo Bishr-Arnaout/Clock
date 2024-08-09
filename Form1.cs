@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Timers;
 using System.Windows.Forms;
 
 namespace Clock
@@ -257,6 +250,17 @@ namespace Clock
             timer2.Start();
             btnPauseTimer.Visible = true;
             btnContinueTimer.Visible = false;
+        }
+        private void RefreshCurrentTime()
+        {
+            lblCurrentTime.Text = DateTime.Now.TimeOfDay.ToString();
+            lblCurrentTime.Text = lblCurrentTime.Text.Substring(0, lblCurrentTime.Text.Length - 8);
+
+            lblCurrentDate.Text = "Current: " + DateTime.Now.ToShortDateString();
+        }
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            RefreshCurrentTime();
         }
     }
 }
